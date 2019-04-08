@@ -24,7 +24,9 @@
 			type="image/x-icon"
 			href="#{resource['images/favicon.svg']}" />
 
-		<title>Crud AdminFaces</title>
+		<title>Donazone |<ui:insert name="title-page"> Área administrativa </ui:insert></title>
+
+
 	</ui:define>
 
 	<ui:define name="logo-lg">
@@ -36,15 +38,15 @@
     </ui:define>
 
 	<ui:define name="menu-begin">
-		<ui:include src="/includes/menu-search.xhtml" />
+		<ui:include src="/WEB-INF/includes/menu-search.xhtml" />
 	</ui:define>
 
 	<ui:define name="menu">
-		<ui:include src="/includes/menu.xhtml" />
+		<ui:include src="/WEB-INF/includes/menu.xhtml" />
 	</ui:define>
 
 	<ui:define name="top-menu">
-		<ui:include src="/includes/top-menu.xhtml" />
+		<ui:include src="/WEB-INF/includes/top-menu.xhtml" />
 	</ui:define>
 
 	<ui:define name="content-end">
@@ -56,7 +58,7 @@
 	<ui:define name="footer">
 		<a
 			target="_blank"
-			href="http://karanalpe.com.br/"> Copyright (C) 2019 - EAS UFPA </a>
+			href="#/"> Copyright (C) 2019 - EAS UFPA </a>
 		<div
 			class="pull-right hidden-xs"
 			style="color: gray">
