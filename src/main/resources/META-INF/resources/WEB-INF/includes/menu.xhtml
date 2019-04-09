@@ -5,7 +5,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 
-	<ul class="sidebar-menu">
+	<ul class="sidebar-menu" data-widget="tree">
 		<li><p:link href="/index.xhtml">
 				<i class="fa fa-home"></i>
 				<span>Home</span>
@@ -19,22 +19,29 @@
 
 		<li class="header">Campanha</li>
 		<li><p:link href="/pages/default/lista-default.xhtml">
-				<i class="fa fa-edit"></i>
-				<span>Default</span>
+				<i class="fa fa-bullhorn"></i>
+				<span>Camapanhas</span>
 			</p:link></li>
 
-		<li class="header">Ações</li>
+		<li class="header">Ação</li>
+
+		<li class="treeview"><a href="#"> <i class="fa fa-blind"></i>
+				<span>Ações</span> <span class="pull-right-container">
+					<i class="fa fa-angle-left pull-right"></i>
+			</span>
+		</a>
+			<ul class="treeview-menu">
+				<li><p:link outcome="/pages/default/lista-default.xhtml">
+						<i class="fa fa-reply-all"></i>
+						<span>Multi level item</span>
+					</p:link></li>
+			</ul></li>
+
+		<li class="header">Doação</li>
 		<li><p:link href="/pages/default/lista-default.xhtml">
-				<i class="fa fa-edit"></i>
-				<span>Default</span>
+				<i class="fa fa-fire"></i>
+				<span>Doações</span>
 			</p:link></li>
-
-		<li class="header">Doações</li>
-		<li><p:link href="/pages/default/lista-default.xhtml">
-				<i class="fa fa-edit"></i>
-				<span>Default</span>
-			</p:link></li>
-
 	</ul>
 
 
