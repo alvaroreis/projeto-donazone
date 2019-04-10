@@ -1,6 +1,11 @@
 package br.com.donazo.donazione.beans;
 
+import java.io.Serializable;
+import java.util.Date;
+
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.donazo.donazione.entities.Acao;
@@ -8,49 +13,65 @@ import br.com.donazo.donazione.repositorios.AcaoRepository;
 
 @Named
 @RequestScoped
-public class AcaoBean {
+public class AcaoBean implements Serializable {
 
-    private Acao acao;
+	private static final long serialVersionUID = -858774744832095173L;
 
-    private Iterable<Acao> acoes;
+	private Acao acao;
 
-    public void init(final AcaoRepository acaoRepository) {
+	private Iterable<Acao> acoes;
 
-        this.acoes = acaoRepository.findAll();
-    }
+	@Inject
+	private AcaoRepository acaoRepository;
 
-    /**
-     * @return the acao
-     */
-    public Acao getAcao() {
+	@PostConstruct
+	public void init() {
+		this.acao = new Acao();
+		this.acao.setCadastro(new Date());
+		this.acoes = this.acaoRepository.findAll();
+	}
 
-        return this.acao;
-    }
+	public void prepaprar() {
+		this.acao = new Acao();
+		this.acao.setCadastro(new Date());
+	}
 
-    /**
-     * @param acao
-     *            the acao to set
-     */
-    public void setAcao(final Acao acao) {
+	public String gravarInserir() {
 
-        this.acao = acao;
-    }
+		this.acaoRepository.save(this.acao);
+		return "/pages/acao/lista.xhtml";
+	}
 
-    /**
-     * @return the acoes
-     */
-    public Iterable<Acao> getAcoes() {
+	/**
+	 * @return the acao
+	 */
+	public Acao getAcao() {
 
-        return this.acoes;
-    }
+		return this.acao;
+	}
 
-    /**
-     * @param acoes
-     *            the acoes to set
-     */
-    public void setAcoes(final Iterable<Acao> acoes) {
+	/**
+	 * @param acao the acao to set
+	 */
+	public void setAcao(final Acao acao) {
 
-        this.acoes = acoes;
-    }
+		this.acao = acao;
+	}
+
+	/**
+	 * @return the acoes
+	 */
+	public Iterable<Acao> getAcoes() {
+
+		return this.acoes;
+	}
+
+	/**
+	 * @param acoes the acoes to set
+	 */
+	public void setAcoes(final Iterable<Acao> acoes) {
+
+		this.acoes = acoes;
+	}
 
 }
