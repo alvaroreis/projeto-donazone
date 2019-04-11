@@ -102,10 +102,12 @@
 										icon="fa fa-trash"
 										title="Excluir"
 										update="@form"
-										action="#{acaoBean.excluir() }">
-										<f:setPropertyActionListener
-											target="#{acaoBean.acao}"
-											value="#{registro}" />
+										action="#{acaoBean.gravarExcluir() }">
+
+										<f:param
+											value="#{registro.id}"
+											name="acao" />
+
 										<p:confirm
 											header="Confirmação"
 											message="Você tem certeza que deseja excluir ação #{registro.nome} ?"
@@ -124,7 +126,7 @@
 							value="Nova"
 							update="@form"
 							action="nova-acao?faces-redirect=true"
-							actionListener="#{acaoBean.prepaprar() }"
+							actionListener="#{acaoBean.prepaprar()}"
 							icon="fa fa-check"
 							styleClass="btn-primary" />
 					</div>
@@ -154,8 +156,11 @@
 					width="60%"
 					modal="true"
 					appendTo="@(body)">
-					
-					<p:ajax event="close" update=":formConteudo" />
+
+					<p:ajax
+						event="close"
+						update=":formConteudo" />
+						
 					<div class="ui-g ui-fluid">
 						<div class="ui-g-12">
 
@@ -222,7 +227,7 @@
 					<div class="hidden-sm hidden-xs">
 						<p:commandButton
 							value="Salvar"
-							update="@form"
+							process="@this"
 							action="#{acaoBean.gravarInserir() }"
 							icon="fa fa-check"
 							styleClass="btn-primary" />
@@ -245,7 +250,6 @@
 					<p:splitButton
 						value="Salvar"
 						action="#{acaoBean.gravarInserir() }"
-						update="@form"
 						icon="fa fa-check"
 						styleClass="hidden-md hidden-lg btn-primary">
 						<p:menuitem

@@ -35,8 +35,11 @@
     </ui:define>
 
 	<ui:define name="logo-mini">
-	<p:graphicImage style="width: 60%;" library="images" name="favicon.svg" />
-    </ui:define>
+		<p:graphicImage
+			style="width: 60%;"
+			library="images"
+			name="favicon.svg" />
+	</ui:define>
 
 	<ui:define name="menu-begin">
 		<ui:include src="/WEB-INF/includes/menu-search.xhtml" />
@@ -54,6 +57,24 @@
 		<section class="content">
 			<ui:insert name="code" />
 		</section>
+		<h:form>
+			<p:confirmDialog
+				global="true"
+				showEffect="fade"
+				hideEffect="fade"
+				styleClass="box-solid box-danger">
+				<p:commandButton
+					value="Não"
+					type="button"
+					styleClass="btn-material btn-danger ui-confirmdialog-no"
+					icon="fa fa-close" />
+				<p:commandButton
+					value="Sim"
+					type="button"
+					styleClass="btn-material btn-primary ui-confirmdialog-yes"
+					icon="fa fa-check" />
+			</p:confirmDialog>
+		</h:form>
 	</ui:define>
 
 	<ui:define name="footer">
@@ -63,7 +84,7 @@
 		<div
 			class="pull-right hidden-xs"
 			style="color: gray">
-			<i>v1.0</i>
+			<i>1.0</i>
 		</div>
 
 		<h:outputScript
