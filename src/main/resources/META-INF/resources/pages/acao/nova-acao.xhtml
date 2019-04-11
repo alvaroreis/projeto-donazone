@@ -45,38 +45,57 @@
 								layout="grid"
 								columnClasses="ui-grid-col-1,ui-grid-col-5,ui-grid-col-1,ui-grid-col-5">
 
-								<p:outputLabel value="Nome" />
+								<p:outputLabel
+									for="nome"
+									value="Nome" />
 								<p:inputText
+									id="nome"
 									placeholder="Insira o nome da ação"
-								 	maxlength="50"
+									maxlength="50"
 									value="#{acaoBean.acao.nome}" />
 
-								<p:outputLabel value="Descricao" />
+								<p:outputLabel
+									for="descricao"
+									value="Descricao" />
 								<p:inputText
+									id="descricao"
 									placeholder="Insira a descrição"
-								 	maxlength="200"
+									maxlength="200"
 									value="#{acaoBean.acao.descricao}" />
 
-								<p:outputLabel value="Data ínicio" />
+								<p:outputLabel
+									for="dataInicio"
+									value="Data ínicio" />
 								<p:calendar
+									id="dataInicio"
 									placeholder="Insira a data de inicio"
 									pattern="dd/MM/yyyy HH:mm"
+									mindate="#{dateUtil.dataAtual }"
+									mask="99/99/9999 99:99"
 									value="#{acaoBean.acao.inicio}" />
 
-								<p:outputLabel value="Data fim" />
+								<p:outputLabel
+									for="dataFim"
+									value="Data fim" />
 								<p:calendar
+									id="dataFim"
 									placeholder="Insira a data de fim"
+									mask="99/99/9999 99:99"
+									mindate="#{dateUtil.dataAtual }"
 									pattern="dd/MM/yyyy HH:mm"
 									value="#{acaoBean.acao.fim}" />
 
-								<p:outputLabel value="Carga horária" />
-								<p:inputNumber
-									placeholder="Insira a carga horária"
+								<p:outputLabel
+									for="cargaHoraria"
+									value="Carga horária" />
+								<p:inputText
+									id="cargaHoraria"
+									placeholder="Insira a carga horária em minutos"
 									minValue="1"
-									value="#{acaoBean.acao.nome}" />
+									type="number"
+									value="#{acaoBean.acao.cargaHoraria}" />
 
 							</p:panelGrid>
-
 						</div>
 					</div>
 
@@ -89,7 +108,6 @@
 							icon="fa fa-check"
 							styleClass="btn-primary" />
 
-
 						<p:commandButton
 							value="Excluir"
 							process="@this"
@@ -100,13 +118,14 @@
 						<p:commandButton
 							value="Voltar"
 							immediate="true"
-							action="lista-default?faces-redirect=true"
+							action="lista-acoes?faces-redirect=true"
 							process="@this"
 							icon="fa fa-close" />
 					</div>
 
 					<p:splitButton
 						value="Salvar"
+						action="#{acaoBean.gravarInserir() }"
 						update="@form"
 						icon="fa fa-check"
 						styleClass="hidden-md hidden-lg btn-primary">
@@ -117,7 +136,7 @@
 						<p:separator />
 						<p:menuitem
 							value="Voltar"
-							action="lista-default?faces-redirect=true"
+							action="lista-acoes?faces-redirect=true"
 							process="@this"
 							icon="fa fa-close" />
 					</p:splitButton>
