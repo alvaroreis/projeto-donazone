@@ -24,9 +24,9 @@ public class AcaoBean implements Serializable {
 
     private Acao acao;
 
-    private Acao acaoSelecionado;
-
     private Iterable<Acao> acoes;
+
+    private boolean operacao = false;
 
     @Autowired
     private AcaoRepository acaoRepository;
@@ -49,6 +49,18 @@ public class AcaoBean implements Serializable {
         }
     }
 
+    public void gravarAlterar() {
+
+        try {
+            this.acaoRepository.save(this.acao);
+            MessagesUtil.criarMensagemDeInformacao("Ação " + this.acao.getNome() + "  alterada.");
+            this.limpar();
+            this.setOperacao(true);
+        } catch (final Exception e) {
+            MessagesUtil.criarMensagemDeErro(e.getMessage());
+        }
+    }
+
     public void gravarExcluir() {
 
         final int acao = Integer.parseInt(UtilBean.obterValor("acao"));
@@ -56,7 +68,6 @@ public class AcaoBean implements Serializable {
             final Optional<Acao> registro = this.acaoRepository.findById(acao);
             this.acaoRepository.delete(registro.get());
             MessagesUtil.criarMensagemDeInformacao("Ação " + registro.get().getNome() + "  excluída.");
-            this.init();
         } catch (final Exception e) {
             MessagesUtil.criarMensagemDeErro(e.getMessage());
         }
@@ -66,9 +77,7 @@ public class AcaoBean implements Serializable {
     public void prepaprar() {
 
         if (this.acao == null) {
-            this.acao = new Acao();
-            this.acao.setCargaHoraria(1);
-            this.acao.setCadastro(new Date());
+            this.limpar();
         }
 
     }
@@ -104,23 +113,6 @@ public class AcaoBean implements Serializable {
     }
 
     /**
-     * @return the acaoSelecionado
-     */
-    public Acao getAcaoSelecionado() {
-
-        return this.acaoSelecionado;
-    }
-
-    /**
-     * @param acaoSelecionado
-     *            the acaoSelecionado to set
-     */
-    public void setAcaoSelecionado(final Acao acaoSelecionado) {
-
-        this.acaoSelecionado = acaoSelecionado;
-    }
-
-    /**
      * @return the acoes
      */
     public Iterable<Acao> getAcoes() {
@@ -135,6 +127,23 @@ public class AcaoBean implements Serializable {
     public void setAcoes(final Iterable<Acao> acoes) {
 
         this.acoes = acoes;
+    }
+
+    /**
+     * @return the operacao
+     */
+    public boolean isOperacao() {
+
+        return this.operacao;
+    }
+
+    /**
+     * @param operacao
+     *            the operacao to set
+     */
+    public void setOperacao(final boolean operacao) {
+
+        this.operacao = operacao;
     }
 
 }
